@@ -1,7 +1,6 @@
 "use client";
 import { Suspense, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { AppRouter } from "next/router";
 import Form from "@components/Form";
 
 const UpdatePrompt = () => {
@@ -63,5 +62,5 @@ const UpdatePrompt = () => {
 
   );
 };
-AppRouter.route("/update-prompt", UpdatePrompt);
+
 export default UpdatePrompt
