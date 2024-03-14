@@ -1,13 +1,12 @@
 "use client"
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Form from "@components/Form";
 
 const UpdatePrompt = () => {
   const router = useRouter();
-  if (!router.isFallback && !post) {
-    return <ErrorPage statusCode={404} />
-}
+ 
+
   const searchParams = useSearchParams();
   const promptId = searchParams.get("id");
 
@@ -53,7 +52,7 @@ const UpdatePrompt = () => {
   };
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    
       <Form
         type="Edit"
         post={post}
@@ -61,7 +60,6 @@ const UpdatePrompt = () => {
         submitting={submitting}
         handleSubmit={updatePrompt}
       />
-    </Suspense>
 
   );
 };
