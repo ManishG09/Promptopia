@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 let isConnected = false; // track the connection
-const uri = process.env.MONGODB_URI || process.env.MONGODB_URI ;
+const uri = 'mongodb://localhost:27017/mydatabase' || process.env.MONGODB_URI ;
 export const connectToDB = async () => {
   mongoose.set('strictQuery', true);
 
