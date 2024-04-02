@@ -1,27 +1,27 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/router"; // Import from 'next/router' instead of 'next/navigation'
-import { useFallback, Suspense } from "react"; // Import from 'react' instead of 'next/navigation'
+import { useRouter } from "next/navigation"; 
+import {  Suspense } from "react"; 
 import Form from "@components/Form";
 
 const UpdatePrompt = () => {
   const router = useRouter();
-  const fallbackResult = useFallback();
-  const Fallback = fallbackResult.Fallback;
   const promptId = router.query?.id;
   const [post, setPost] = useState({ prompt: "", tag: "" });
   const [submitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
-    const getPromptDetails = async () => {
-      const response = await fetch(`/api/prompt/${promptId}`);
-      const data = await response.json();
-      setPost({
-        prompt: data.prompt,
-        tag: data.tag,
-      });
-    };
-    if (promptId) getPromptDetails();
+    if (promptId) {
+      const getPromptDetails = async () => {
+        const response = await fetch(`/api/prompt/${promptId}`);
+        const data = await response.json();
+        setPost({
+          prompt: data.prompt,
+          tag: data.tag,
+        });
+      };
+      getPromptDetails();
+    }
   }, [promptId]);
 
   const updatePrompt = async (e) => {
@@ -47,7 +47,7 @@ const UpdatePrompt = () => {
   };
 
   return (
-    <Suspense fallback={<Fallback />}>
+    <Suspense fallback={<div>Loading...</div>}>
       <Form
         type="Edit"
         post={post}
